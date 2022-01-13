@@ -1,8 +1,15 @@
-import MealsSummary from './MealsSummary';
+import MealsSummary from './components/MealsSummary';
+import Header from './components/header/Header';
+import React from 'react';
 
 function App() {
   return (
-    <MealsSummary/>
+    <React.Fragment>
+      <Header />
+      <main>
+          <MealsSummary />
+      </main>
+    </React.Fragment>
   );
 }
 

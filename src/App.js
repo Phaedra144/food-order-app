@@ -1,7 +1,7 @@
-import MealsSummary from './components/mealsummary/MealsSummary';
+import MealsSummary from './components/meals/summary/MealsSummary';
 import Header from './components/header/Header';
 import React from 'react';
-import Meals from './components/meals/Meals';
+import Meals from './components/meals/listavailable/Meals';
 
 function App() {
   return (

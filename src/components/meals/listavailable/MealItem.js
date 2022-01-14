@@ -4,10 +4,6 @@ import styles from './MealItem.module.css';
 
 function MealItem(props) {
 
-    const inputAmountHandler = (amount) => {
-		props.onAmountHandler(amount);
-    };
-
 	return (
         <li className={styles.meal}>
             <div>
@@ -15,7 +11,7 @@ function MealItem(props) {
                 <div className={styles.description}>{props.description}</div>
                 <div className={styles.price}>${props.price}</div>
             </div>
-            <MealForm onAddAmount={inputAmountHandler}></MealForm>
+            <MealForm></MealForm>
         </li>
     );
 

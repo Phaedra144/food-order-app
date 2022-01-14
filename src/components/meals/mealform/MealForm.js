@@ -1,27 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useRef } from 'react'
+import AmountContext from '../../../context/amount-context';
 import styles from './MealForm.module.css';
 
 const MealForm = (props) => {
 
-    const [amountState, setAmountState] = useState(1);
+    const amountRef = useRef();
 
-    const amountStateHandler = (event) => {
-        setAmountState(event.target.value);
-    };
+    const ctx = useContext(AmountContext)
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onAddAmount(amountState);
+        const enteredAmount = amountRef.current.value;
+        ctx.getSumAmount(enteredAmount);
     };
 
     return (
-            <form onSubmit={submitHandler} className={styles.form}>
-                <div className={styles.input}>
-                    <label htmlFor="amount">Amount</label>
-                    <input id="amount" type="number" value={amountState} onChange={amountStateHandler} />
-                </div>
-                <button type="submit">+ Add</button>
-            </form>
+        <form onSubmit={submitHandler} className={styles.form}>
+            <div className={styles.input}>
+                <label htmlFor="amount">Amount</label>
+                <input id="amount" type="number" ref={amountRef} defaultValue={1} />
+            </div>
+            <button type="submit">+ Add</button>
+        </form>
     );
 
 };

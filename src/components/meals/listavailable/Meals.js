@@ -32,17 +32,12 @@ const DUMMY_MEALS = [
 
 function Meals(props) {
 
-  const inputAmountHandler = (amount) => {
-      props.onRecivingAmount(amount);
-  };
-
   const mealsList = DUMMY_MEALS.map((meal) => (
     <MealItem
       key={meal.id}
       name={meal.name}
       description={meal.description}
       price={meal.price}
-      onAmountHandler={inputAmountHandler}
     />
   ));
 

@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AmountContextProvider } from './context/amount-context';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <AmountContextProvider>
     <App />
-  </React.StrictMode>,
+  </AmountContextProvider>,
   document.getElementById('root')
 );
 

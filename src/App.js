@@ -1,17 +1,31 @@
-import MealsSummary from './components/meals/summary/MealsSummary';
+import React, { useState } from 'react'
 import Header from './components/header/Header';
-import React from 'react';
+import MealsSummary from './components/meals/summary/MealsSummary';
 import Meals from './components/meals/listavailable/Meals';
+import AmountContext from './context/amount-context';
 
 function App() {
+
+  const [sumAmountState, setSumAmountState] = useState(0);
+
+  const sumAmountHandler = (amount) => {
+    setSumAmountState((prevAmount) => {
+      return parseInt(prevAmount) + parseInt(amount);
+    });
+  }
+  
   return (
-    <React.Fragment>
+    <AmountContext.Provider
+      value={{
+        givenAmount: sumAmountState
+      }}
+    >
       <Header />
       <main>
-          <MealsSummary />
-          <Meals />
+        <MealsSummary />
+        <Meals onRecivingAmount={sumAmountHandler} />
       </main>
-    </React.Fragment>
+    </AmountContext.Provider>
   );
 }
 

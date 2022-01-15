@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import AmountContext from '../../../context/amount-context';
 import styles from './MealForm.module.css';
 
@@ -11,7 +11,7 @@ const MealForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         const enteredAmount = amountRef.current.value;
-        ctx.getSumAmount(enteredAmount);
+        ctx.addAmount(enteredAmount);
     };
 
     return (

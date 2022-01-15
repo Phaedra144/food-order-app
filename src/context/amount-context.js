@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 const AmountContext = React.createContext({
     givenAmount: 0,
@@ -18,7 +18,7 @@ export const AmountContextProvider = (props) => {
         <AmountContext.Provider
             value={{
                 givenAmount: sumAmountState,
-                getSumAmount: sumAmountHandler 
+                addAmount: sumAmountHandler 
             }}
         >
             {props.children}

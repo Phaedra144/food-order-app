@@ -1,18 +1,17 @@
 import React from 'react'
 import Header from './components/header/Header';
-import MealsSummary from './components/meals/summary/MealsSummary';
 import Meals from './components/meals/listavailable/Meals';
+import CartProvider from './context/CartProvider';
 
 function App() {
   
   return (
-    <React.Fragment>
+    <CartProvider>
       <Header />
       <main>
-        <MealsSummary />
         <Meals />
       </main>
-    </React.Fragment>
+    </CartProvider>
   );
 }
 

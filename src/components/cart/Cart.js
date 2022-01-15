@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CartContext from '../../context/cart-context';
 import styled from './Cart.module.css';
 import CartItem from './CartItem';
 
 function Cart(props) {
 
-    const cartItems = [].map((cartItem) => (
+    const ctx = useContext(CartContext);
+
+    const cartItems = ctx.items.map((cartItem) => (
         <CartItem
           key={cartItem.id}
           name={cartItem.name}

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../UI/Card";
+import MealsSummary from "../summary/MealsSummary";
 import MealItem from "./MealItem";
 import styles from "./Meals.module.css";
 
@@ -43,6 +44,7 @@ function Meals(props) {
 
   return (
     <section>
+      <MealsSummary />
       <Card className={styles.meals}>
         <ul>{mealsList}</ul>
       </Card>

@@ -13,7 +13,7 @@ const Modal = (props) => {
     const ModalOverlay = (props) => {
         return (
             <Card className={classes.modal}>
-                <Cart />
+                <Cart onCloseModal={props.onClose} />
             </Card>
         );
     };

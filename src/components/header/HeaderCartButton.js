@@ -14,9 +14,13 @@ const HeaderCartButton = (props) => {
         setIsCartOpen(true);
     };
 
+    const closeModal = () => {
+        setIsCartOpen(false);
+    };
+
     return (
         <React.Fragment>
-            {isCartOpen && <Modal />}
+            {isCartOpen && <Modal onClose={closeModal} />}
             <button type={props.type || 'button'} className={styles.button} onClick={openCartHandler}>
                 <span className={styles.icon}>
                     <CartIcon />

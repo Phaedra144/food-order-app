@@ -1,4 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Cart from '../cart/Cart';
+import Card from '../UI/Card';
+import classes from './Modal.module.css';
 
 const Modal = (props) => {
 
@@ -9,15 +13,7 @@ const Modal = (props) => {
     const ModalOverlay = (props) => {
         return (
             <Card className={classes.modal}>
-                <header className={classes.header}>
-                    <h2>{props.title}</h2>
-                </header>
-                <div className={classes.content}>
-                    <p>{props.message}</p>
-                </div>
-                <footer className={classes.actions}>
-                    <Button onClick={props.onClose}>Okay</Button>
-                </footer>
+                <Cart />
             </Card>
         );
     };
@@ -35,4 +31,4 @@ const Modal = (props) => {
     );
 };
 
-export default ErrorModal;
+export default Modal;

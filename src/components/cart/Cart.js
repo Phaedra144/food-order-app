@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import CartContext from '../../context/cart-context';
+import Modal from '../modal/Modal';
 import styled from './Cart.module.css';
 import CartItem from './CartItem';
 
@@ -29,17 +30,17 @@ function Cart(props) {
       ));
 
     return (
-        <React.Fragment>
+        <Modal onClose={props.onClose}>
             <ul className={styled['cart-items']}>{cartItems}</ul>
             <div className={styled.total}>
                 <span>Total Amount</span>
-                <span>${totalAmount}</span>
+                <span>{totalAmount}</span>
             </div>
             <div className={styled.actions}>
-                <button className={styled['button--alt']} onClick={props.onCloseModal}>Close</button>
+                <button className={styled['button--alt']} onClick={props.onClose}>Close</button>
                 <button className={styled.button}>Order</button>
             </div>
-        </React.Fragment>
+        </Modal>
     );
 };
 

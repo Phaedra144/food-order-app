@@ -5,14 +5,26 @@ import CartItem from './CartItem';
 
 function Cart(props) {
 
-    const ctx = useContext(CartContext);
+    const cartCtx = useContext(CartContext);
 
-    const cartItems = ctx.items.map((cartItem) => (
+    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+
+    const cartItemRemoveHandler = (id) => {
+        cartCtx.removeItem(id);
+      };
+    
+      const cartItemAddHandler = (item) => {
+        cartCtx.addItem({...item, amount: 1});
+      };
+
+    const cartItems = cartCtx.items.map((cartItem) => (
         <CartItem
           key={cartItem.id}
           name={cartItem.name}
           price={cartItem.price}
           amount={cartItem.amount}
+          onRemove={cartItemRemoveHandler.bind(null, cartItem.id)}
+          onAdd={cartItemAddHandler.bind(null, cartItem)}
         />
       ));
 
@@ -21,11 +33,11 @@ function Cart(props) {
             <ul className={styled['cart-items']}>{cartItems}</ul>
             <div className={styled.total}>
                 <span>Total Amount</span>
-                <span>$88.99</span>
+                <span>${totalAmount}</span>
             </div>
             <div className={styled.actions}>
-                <button onClick={props.onCloseModal}>Close</button>
-                <button>Order</button>
+                <button className={styled['button--alt']} onClick={props.onCloseModal}>Close</button>
+                <button className={styled.button}>Order</button>
             </div>
         </React.Fragment>
     );

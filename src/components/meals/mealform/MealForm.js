@@ -11,11 +11,12 @@ const MealForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         const mealItem = {
-            key: props.key,
+            key: props.id,
             name: props.name,
             price: props.price,
             amount: amountRef.current.value
         }
+        console.log('New items sending to Cart: ' + JSON.stringify(mealItem))
         ctx.addItem(mealItem);
     };
 

@@ -11,7 +11,7 @@ const MealForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         const mealItem = {
-            key: props.id,
+            id: props.id,
             name: props.name,
             price: props.price,
             amount: amountRef.current.value

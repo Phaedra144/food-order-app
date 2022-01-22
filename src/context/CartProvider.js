@@ -38,7 +38,7 @@ const cartReducer = (state, action) => {
     if (action.type === 'ADD') {
         const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
         const updatedTotalNrOfItems = parseInt(state.totalNrOfItems) + parseInt(action.item.amount);
-        let updatedItems = updateItems(state.items, action.item);
+        let updatedItems = addAndUpdateItems(state.items, action.item);
 
         return {
             items: updatedItems,
@@ -46,17 +46,29 @@ const cartReducer = (state, action) => {
             totalNrOfItems: updatedTotalNrOfItems
         };
     }
+
+    if (action.type === 'REMOVE') {
+        const existingCartItem = state.items.filter(item => item.id === action.id)[0];
+        const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+        const updatedTotalNrOfItems = state.totalNrOfItems - 1;
+        let updatedItems = removeAndUpdateItems(state.items, existingCartItem);
+
+        return {
+            items: updatedItems,
+            totalAmount: updatedTotalAmount,
+            totalNrOfItems: updatedTotalNrOfItems
+        };
+    }
+
     return defaultCartState;
 };
 
-const updateItems = (cartItems, newItem) => {
+const addAndUpdateItems = (cartItems, newItem) => {
     let updatedItems = [];
-    console.log("New item: " + JSON.stringify(newItem));
 
     const existingCartItemIndex = cartItems.findIndex(
         (item) => item.id === newItem.id
     );
-    console.log("ExistingCartItem Index: " + existingCartItemIndex);
 
     const existingCartItem = cartItems[existingCartItemIndex];
 
@@ -73,10 +85,35 @@ const updateItems = (cartItems, newItem) => {
 
     let everyItemsToPrint = '';
     updatedItems.forEach(element => {
-        everyItemsToPrint = everyItemsToPrint + JSON.stringify(element);            
+        everyItemsToPrint = everyItemsToPrint + JSON.stringify(element);
     });
 
     console.log("Every items: " + everyItemsToPrint);
+
+    return updatedItems;
+};
+
+const removeAndUpdateItems = (cartItems, removingCartItem) => {
+    let updatedItems = [];
+
+    const removingCartItemIndex = cartItems.findIndex(
+        (item) => item.id === removingCartItem.id
+    );
+
+    console.log("Removing cart item: " + JSON.stringify(removingCartItem) +
+     " and cart item index: " + removingCartItemIndex);
+
+    if (removingCartItem.amount > 1) {
+        const updatedItem = {
+            ...removingCartItem,
+            amount: removingCartItem.amount - 1
+        };
+        updatedItems = [...cartItems];
+        updatedItems[removingCartItemIndex] = updatedItem;
+    } else {
+        updatedItems = [...cartItems];
+        updatedItems.splice(removingCartItemIndex, 1);
+    }
 
     return updatedItems;
 };

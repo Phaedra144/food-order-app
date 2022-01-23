@@ -30,6 +30,10 @@ function Cart(props) {
         />
       ));
 
+      const orderHandler = (event) => {
+        console.log('Ordering...');
+      };
+
     return (
         <Modal onClose={props.onClose}>
             <ul className={styled['cart-items']}>{cartItems}</ul>
@@ -39,7 +43,7 @@ function Cart(props) {
             </div>
             <div className={styled.actions}>
                 <button className={styled['button--alt']} onClick={props.onClose}>Close</button>
-                <button className={styled.button}>Order</button>
+                <button className={styled.button} onClick={orderHandler}>Order</button>
             </div>
         </Modal>
     );

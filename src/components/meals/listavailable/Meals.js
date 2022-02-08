@@ -26,10 +26,10 @@ function Meals(props) {
     };
 
     fetchMeals(
-      { url: 'https://react-food-order-69328-default-rtdb.europe-west1.firebasedatabase.app/food.json' },
+      { url: 'https://react-food-order-69328-default-rtdb.europe-west1.firebasedatab1ase.app/food.json' },
       addMeal
     );
-  }, []);
+  }, [fetchMeals]);
 
   const mealsList = meals.map((meal) => (
     <MealItem
@@ -41,12 +41,21 @@ function Meals(props) {
     />
   ));
 
+  if (isLoading) {
+    return (
+      <section className={styles.mealsLoading}>
+        <p>Loading meals...</p>
+      </section>
+    );
+  }
+
   return (
     <section>
       <MealsSummary />
       <Card className={styles.meals}>
         <ul>{mealsList}</ul>
       </Card>
+      {error && <p className={styles.mealsLoadingError}>{error}</p>}
     </section>
   );
 };

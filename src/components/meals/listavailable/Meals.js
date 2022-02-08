@@ -1,39 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../UI/Card";
 import MealsSummary from "../summary/MealsSummary";
 import MealItem from "./MealItem";
 import styles from "./Meals.module.css";
-
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-  },
-  {
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-  },
-];
+import useHttp from '../../../hooks/use-http';
 
 function Meals(props) {
 
-  const mealsList = DUMMY_MEALS.map((meal) => (
+  const [meals, setMeals] = useState([]);
+
+  const { isLoading, error, sendRequest: fetchMeals } = useHttp();
+
+  useEffect(() => {
+    const fetchList = [];
+    const addMeal = (mealObj) => {
+      for (const mealKey in mealObj) {
+        fetchList.push({
+          id: mealKey,
+          name: mealObj[mealKey].name,
+          description: mealObj[mealKey].description,
+          price: mealObj[mealKey].price
+        });
+      }
+      setMeals(fetchList);
+    };
+
+    fetchMeals(
+      { url: 'https://react-food-order-69328-default-rtdb.europe-west1.firebasedatabase.app/food.json' },
+      addMeal
+    );
+  }, []);
+
+  const mealsList = meals.map((meal) => (
     <MealItem
       key={meal.id}
       id={meal.id}
